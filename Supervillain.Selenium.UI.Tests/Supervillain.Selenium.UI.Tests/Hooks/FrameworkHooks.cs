@@ -14,13 +14,12 @@ namespace Supervillain.Selenium.UI.Tests.Pages
     {
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
 
-        public static IWebDriver Driver { get; set; }
+        public static IWebDriver driver { get; set; }
 
         [Binding]
         public class Initialize
         {
             private FeatureContext _featureContext;
-            //protected IWebDriver driver;
             private string AppURL = "https://responsivefight.herokuapp.com/";
 
             public Initialize(FeatureContext featureContext)
@@ -31,9 +30,9 @@ namespace Supervillain.Selenium.UI.Tests.Pages
             [BeforeScenario]
             public void TestInitialize()
             {
-                Driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));                
-                Driver.Url = AppURL;
-                Driver.Manage().Window.Maximize();
+                driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));                
+                driver.Url = AppURL;
+                driver.Manage().Window.Maximize();
             }
         }
         [Binding]
@@ -42,7 +41,7 @@ namespace Supervillain.Selenium.UI.Tests.Pages
             [AfterScenario]
             public void CleanUpScenario()
             {
-                Driver.Quit();
+                driver.Quit();
             }
         }
     }

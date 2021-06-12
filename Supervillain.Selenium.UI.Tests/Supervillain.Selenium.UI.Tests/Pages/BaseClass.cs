@@ -9,9 +9,9 @@ namespace Supervillain.Selenium.UI.Tests.Pages
 {
     public abstract class BaseClass : LoadableComponent<BaseClass>
     {
-        private readonly IWebDriver _driver;
-        private readonly WebDriverWait _wait;
-        private const int DefaultTimeout = 15;
+        protected IWebDriver _driver;
+        protected WebDriverWait _wait;
+        protected const int DefaultTimeout = 15;
 
         protected BaseClass(IWebDriver driver)
         {
@@ -24,22 +24,21 @@ namespace Supervillain.Selenium.UI.Tests.Pages
             get { return _driver; }
         }
 
-        public WebDriverWait Wait 
-        { 
-            get { return _wait; } 
+        public WebDriverWait Wait
+        {
+            get { return _wait; }
         }
-
 
         public void RefreshPage()
         {
             _driver.Navigate().Refresh();
         }
 
-
         protected override void ExecuteLoad()
         {
-        }     
+        }
     }
 }
+
 
 
