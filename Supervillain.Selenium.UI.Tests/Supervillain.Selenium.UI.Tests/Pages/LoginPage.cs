@@ -6,27 +6,38 @@ using System.Text;
 
 namespace Supervillain.Selenium.UI.Tests.Pages
 {
-    class Login : BaseClass
+    public class LoginPage : BaseClass
     {
         //Locator
         private By usernameLocator = By.XPath("//input[@id='worrior_username']");
         private By createWorriorLocator = By.Id("warrior");
+        private By startJourneyLocator = By.Id("start");
         
         //Page element
         private IWebElement usernameInput => Driver.FindElement(usernameLocator);
         private IWebElement createWarriorButton => Driver.FindElement(createWorriorLocator);
-
-        protected Login(IWebDriver driver) : base(driver)
+        private IWebElement startJourneyButton => Driver.FindElement(startJourneyLocator);
+       
+        public LoginPage(IWebDriver driver) : base(driver)
         {
         }
 
-        public void LoginWithUsername(string username)
+        public void CreateWarrior(string username)
         {
             usernameInput.SendKeys(username);
 
             createWarriorButton.Click();
+
+            StartJourney();
         }
       
+        public void StartJourney()
+        {
+            Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(startJourneyLocator));
+
+            startJourneyButton.Click();
+        }
+
         protected override bool EvaluateLoadedStatus()
         {
             try
