@@ -30,10 +30,10 @@ namespace Supervillain.Selenium.UI.Tests.Steps
             login.CreateWarrior(username);
         }
 
-        [Then(@"the user is created")]
-        public void ThenTheUserIsCreated()
+        [Then(@"the user '(.*)' is created")]
+        public void ThenTheUserIsCreated(string username)
         {
-           //Assert username on page
+            Assert.AreEqual(username, game.GetUserName());
         }
 
         [Then(@"the game page is displayed")]
