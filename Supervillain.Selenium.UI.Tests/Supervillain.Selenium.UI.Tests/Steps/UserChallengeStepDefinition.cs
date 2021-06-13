@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using TechTalk.SpecFlow;
 using static Supervillain.Selenium.UI.Tests.Pages.GamePage;
-//using Supervillain.Selenium.UI.Tests.Pages.GamePage;
 
 namespace Supervillain.Selenium.UI.Tests.Steps
 {
@@ -67,25 +67,31 @@ namespace Supervillain.Selenium.UI.Tests.Steps
         [When(@"the user choose the incorrect answer")]
         public void WhenTheUserChooseTheIncorrectAnswer()
         {
-            ScenarioContext.Current.Pending();
+            game.SelectAnswerForBus(2);
         }
 
         [Then(@"the next challenge is displayed")]
         public void ThenTheNextChallengeIsDisplayed()
         {
-            ScenarioContext.Current.Pending();
+            Assert.IsTrue(game.TryNextChallengeIsDisplayed());
         }
 
         [When(@"the challenge timeout")]
         public void WhenTheChallengeTimeout()
         {
-            ScenarioContext.Current.Pending();
+            game.WaitforTimeout(10000);         
+        }
+
+        [Then(@"the covid poster is displayed")]
+        public void ThenTheCovidPosterIsDisplayed()
+        {
+            Assert.IsTrue(game.CovidPosterIsDisplayed());
         }
 
         [Then(@"the try again option is displayed")]
         public void ThenTheTryAgainOptionIsDisplayed()
         {
-            ScenarioContext.Current.Pending();
+            Assert.IsTrue(game.TryAgainIsDisplayed());
         }
 
     }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Supervillain.Selenium.UI.Tests.Pages
 {
@@ -40,24 +41,47 @@ namespace Supervillain.Selenium.UI.Tests.Pages
             return new ModalDialog(Driver);
         }
 
-        public void SelectAnswerForBus(int answerNumber)
+        internal void SelectAnswerForBus(int answerNumber)
         {
             IWebElement answer = Driver.FindElement(By.Id("bus_answer_" + answerNumber));
           
             answer.Click();
         }
 
-        public string GetScore()
+        internal string GetScore()
         {
             var dialog = new ModalDialog(Driver);
             var score = dialog.GetSccore();
             return score;
         }
 
-        public void CheckScore()
+        internal void CheckScore()
         {
             var dialog = new ModalDialog(Driver);
             dialog.CheckScore();
+        }
+
+        public bool? TryAgainIsDisplayed()
+        {
+            var dialog = new ModalDialog(Driver);
+            return dialog.TryAgainIsDisplayed();
+        }
+
+        internal bool? TryNextChallengeIsDisplayed()
+        {
+            var dialog = new ModalDialog(Driver);
+            return dialog.NextChallengeIsDisplayed();
+        }
+
+        internal void WaitforTimeout(int timeout)
+        {
+            Thread.Sleep(timeout);
+        }
+
+        internal bool? CovidPosterIsDisplayed()
+        {
+            var dialog = new ModalDialog(Driver);
+            return dialog.CovidPosterIsDisplayed();
         }
 
         protected override bool EvaluateLoadedStatus()
