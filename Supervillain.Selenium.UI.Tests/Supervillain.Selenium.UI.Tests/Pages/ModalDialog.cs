@@ -7,20 +7,20 @@ namespace Supervillain.Selenium.UI.Tests.Pages
     {
         public class ModalDialog : BaseClass
         {
-            //private IWebDriver driver;
-
             //Locator
             private By modalDialog = By.ClassName("modal-dialog");
             private By startLocator = By.XPath("//button[text()='Start']");
             private By tryAgainLocator = By.Id("close_modal_btn_2");
             private By tryNextLocator = By.Id("close_correct_modal_btn");
             private By scoreLocator = By.XPath("//p[@id='score']");
+            private By checkScoreLocator = By.Id("leaderboard_link");
 
             //Element
             IWebElement StartButton => Driver.FindElement(startLocator);
             IWebElement TryAgainButton => Driver.FindElement(tryAgainLocator);
             IWebElement TryNextButton => Driver.FindElement(tryNextLocator);
             IWebElement Score => Driver.FindElement(scoreLocator);
+            IWebElement CheckScoreButton => Driver.FindElement(checkScoreLocator);
 
             public ModalDialog(IWebDriver driver) : base(driver)
             {
@@ -51,6 +51,11 @@ namespace Supervillain.Selenium.UI.Tests.Pages
                 string score = texts[4].Trim();
 
                 return score;
+            }
+
+            public void CheckScore()
+            {
+                CheckScoreButton.Click();
             }
 
             protected override bool EvaluateLoadedStatus()

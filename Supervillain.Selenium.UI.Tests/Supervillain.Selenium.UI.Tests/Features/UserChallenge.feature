@@ -6,7 +6,9 @@ Background: Create user and start the challenge
 Scenario: User challenge Correct
 	When the user start the challenge 'Take the bus'
 	And the user choose the correct answer
-	Then the score is displayed
+	Then the score '100' is displayed
+	When the user check the final score
+	Then the final score '100' is displayed
 
 Scenario: User challenge Incorrect
 	When the user start the challenge 'Take the bus'

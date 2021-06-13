@@ -18,6 +18,8 @@ namespace Supervillain.Selenium.UI.Tests.Steps
         LoginPage login = new LoginPage(driver);
         GamePage game = new GamePage(driver);
         ModalDialog dialog = new ModalDialog(driver);
+        LeaderboardPage leaderboard = new LeaderboardPage(driver);
+        String username = string.Empty;
 
         public UserChallengeStepDefinition(ScenarioContext scenarioContext)
         {
@@ -27,7 +29,7 @@ namespace Supervillain.Selenium.UI.Tests.Steps
         [Given(@"user is created")]
         public void GivenUserIsCreated()
         {
-            var username = Utils.RandomStrinGenerator(5);
+            username = Utils.RandomStrinGenerator(5);
             login.CreateWarrior(username);
         }
 
@@ -43,10 +45,23 @@ namespace Supervillain.Selenium.UI.Tests.Steps
             game.SelectAnswerForBus(1);
         }
 
-        [Then(@"the score is displayed")]
-        public void ThenTheScoreIsDisplayed()
+
+        [Then(@"the score '(.*)' is displayed")]
+        public void ThenTheScoreIsDisplayed(string score)
         {
-            Assert.AreEqual("100", game.GetScore());
+            Assert.AreEqual(score, game.GetScore());
+        }
+
+        [When(@"the user check the final score")]
+        public void WhenTheUserCheckTheFinalScore()
+        {
+            game.CheckScore();
+        }
+
+        [Then(@"the final score '(.*)' is displayed")]
+        public void ThenTheFinalScoreIsDisplayed(string score)
+        {
+            Assert.AreEqual(score, leaderboard.GetFinalScore(username));
         }
 
         [When(@"the user choose the incorrect answer")]
