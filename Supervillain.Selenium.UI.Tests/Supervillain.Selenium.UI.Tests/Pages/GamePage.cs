@@ -39,6 +39,14 @@ namespace Supervillain.Selenium.UI.Tests.Pages
 
             return new ModalDialog(Driver);
         }
+
+        public void SelectAnswerForBus(int answerNumber)
+        {
+            IWebElement answer = Driver.FindElement(By.Id("bus_answer_" + answerNumber));
+          
+            answer.Click();
+        }
+
         public string GetScore()
         {
             var dialog = new ModalDialog(Driver);
@@ -46,11 +54,10 @@ namespace Supervillain.Selenium.UI.Tests.Pages
             return score;
         }
 
-        public void SelectAnswerForBus(int answerNumber)
+        public void CheckScore()
         {
-            IWebElement answer = Driver.FindElement(By.Id("bus_answer_" + answerNumber));
-          
-            answer.Click();
+            var dialog = new ModalDialog(Driver);
+            dialog.CheckScore();
         }
 
         protected override bool EvaluateLoadedStatus()
