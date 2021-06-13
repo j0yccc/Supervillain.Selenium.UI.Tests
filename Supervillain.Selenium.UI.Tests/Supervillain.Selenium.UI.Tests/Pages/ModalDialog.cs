@@ -10,39 +10,41 @@ namespace Supervillain.Selenium.UI.Tests.Pages
             //Locator
             private By modalDialog = By.ClassName("modal-dialog");
             private By startLocator = By.XPath("//button[text()='Start']");
-            private By tryAgainLocator = By.Id("close_modal_btn_2");
-            private By tryNextLocator = By.Id("close_correct_modal_btn");
+            private By tryAgainLocator = By.XPath("//button[text()='Try again']");
+            private By tryNextChallengeLocator = By.XPath("//button[text()='Try the next battle']");
             private By scoreLocator = By.XPath("//p[@id='score']");
             private By checkScoreLocator = By.Id("leaderboard_link");
+            private By covidPosterLocator = By.Id("img-protection_poster");
 
             //Element
             IWebElement StartButton => Driver.FindElement(startLocator);
             IWebElement TryAgainButton => Driver.FindElement(tryAgainLocator);
-            IWebElement TryNextButton => Driver.FindElement(tryNextLocator);
+            IWebElement TryNexChallengetButton => Driver.FindElement(tryNextChallengeLocator);
             IWebElement Score => Driver.FindElement(scoreLocator);
             IWebElement CheckScoreButton => Driver.FindElement(checkScoreLocator);
+            IWebElement covidPoster => Driver.FindElement(covidPosterLocator);
 
             public ModalDialog(IWebDriver driver) : base(driver)
             {
                 
             }
 
-            public void Start()
+            internal void Start()
             {
                 StartButton.Click();
             }
             
-            public void TryAgain()
+            internal void TryAgain()
             {
                 TryAgainButton.Click();
             }
 
-            public void TryNext()
+            internal void TryNext()
             {
-                TryNextButton.Click();
+                TryAgainButton.Click();
             }
 
-            public string GetSccore()
+            internal string GetSccore()
             {
                 Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(scoreLocator));
 
@@ -53,7 +55,37 @@ namespace Supervillain.Selenium.UI.Tests.Pages
                 return score;
             }
 
-            public void CheckScore()
+            internal bool? TryAgainIsDisplayed()
+            {
+                try
+                {
+                    Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(tryAgainLocator));
+
+                }
+                catch (Exception e)
+                {
+                    return TryAgainButton.Displayed;
+                }
+                return null;
+            }
+
+            internal bool? NextChallengeIsDisplayed()
+            {
+                Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(tryNextChallengeLocator));
+
+
+                return TryNexChallengetButton.Displayed;
+            }
+
+            internal bool? CovidPosterIsDisplayed()
+            {
+                Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(covidPosterLocator));
+
+
+                return covidPoster.Displayed;
+            }
+
+            internal void CheckScore()
             {
                 CheckScoreButton.Click();
             }
