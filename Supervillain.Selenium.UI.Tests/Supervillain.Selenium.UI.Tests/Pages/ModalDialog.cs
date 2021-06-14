@@ -57,16 +57,9 @@ namespace Supervillain.Selenium.UI.Tests.Pages
 
             internal bool? TryAgainIsDisplayed()
             {
-                try
-                {
-                    Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(tryAgainLocator));
+                Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(tryAgainLocator));
 
-                }
-                catch (Exception e)
-                {
-                    return TryAgainButton.Displayed;
-                }
-                return null;
+                return TryAgainButton.Displayed;
             }
 
             internal bool? NextChallengeIsDisplayed()
