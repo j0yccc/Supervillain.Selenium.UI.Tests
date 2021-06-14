@@ -15,3 +15,5 @@ Steps:
 5. Run the tests in Test Explorer.
 6. Test results pass/fail will be displayed.
 
+CI Pipeline:
+https://gitlab.com/joycechin/Supervillain-Selenium-UI-Tests/-/pipelines
